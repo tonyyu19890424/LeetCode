@@ -1,0 +1,19 @@
+Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2, also represented as a string.
+
+Note: You must not use any built-in BigInteger library or convert the inputs to integer directly.
+
+Input: num1 = "2", num2 = "3"
+Output: "6"
+
+/**
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ */
+var multiply = function(num1, num2) {
+    var a = BigInt(num1);
+    var b = BigInt(num2);
+    var sum = BigInt(a * b);
+    
+    return sum.toString();
+};
