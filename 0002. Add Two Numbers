@@ -1,0 +1,46 @@
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Input: l1 = [2,4,3], l2 = [5,6,4]
+Output: [7,0,8]
+Explanation: 342 + 465 = 807.
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+// By Tony
+var addTwoNumbers = function(l1, l2) {
+    var list = new ListNode(0); //設定初始List，第一個值是0
+    var result = list;
+    var sum, carry = 0;
+    
+    while(l1 || l2 || carry > 0){ // 用來處理兩個list不同長度，以及進位還>0
+        
+        sum =0;
+        //兩個list各自把值加總到sum之中，加完後跳到下一個節點(l1.next)
+        if(l1 !== null){
+            sum += l1.val;
+            l1 = l1.next;
+        }
+        if(l2 !== null){
+            sum += l2.val;
+            l2 = l2.next;
+        }
+        sum += carry;
+        list.next = new ListNode(sum%10); //超過9把個位數放到list中，十位數就得進位
+        carry = parseInt(sum/10); //處理十位數的進位
+        list = list.next; //往後到list下一個點
+    }
+    return result.next;
+};
