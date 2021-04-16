@@ -1,0 +1,59 @@
+Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+
+A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+
+
+
+ 
+
+Example 1:
+
+Input: digits = "23"
+Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+
+
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+    var dic = {
+        '2': ['a', 'b', 'c'],
+        '3': ['d', 'e', 'f'],
+        '4': ['g', 'h', 'i'],
+        '5': ['j', 'k', 'l'],
+        '6': ['m', 'n', 'o'],
+        '7': ['p', 'q', 'r', 's'],
+        '8': ['t', 'u', 'v'],
+        '9': ['w', 'x', 'y', 'z']
+    }
+    
+    // 回傳輸出結果的陣列 output
+    var output = [];
+
+    // 如果數入的字串不為空，就去計算它的排列
+    if (digits.length !== 0) {
+        letterCombi(digits, '');
+    }
+
+    return output;
+
+    function letterCombi(digits, str) {
+        // 如果向下找沒有資料了，就存進陣列
+        if (digits === '') {
+            output.push(str);
+        }
+        else {
+            // 找出第一個的數字2
+            //console.log(digits[0]);
+            // 找出2對應的字典array ["a", "b", "c"]
+            console.log(dic[digits[0]]);
+            // 計算出array的長度
+            // console.log(dic[digits[0]].length);
+            for (var i = 0; i < dic[digits[0]].length; i++) {
+                // 扣掉2之後的字串3與a遞迴
+                letterCombi(digits.substr(1), str + dic[digits[0]][i]);
+            }
+        }
+    }
+};
